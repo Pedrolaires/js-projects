@@ -1,0 +1,53 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Criar conta ou Entrar</h1>
+      <p class="text-center lead">Faça seu login abaixo!</p>
+      <%- include('includes/messages') %>
+      <div class="row">
+        <div class="col-lg my-4">
+          <h4>Faça seu cadastro</h4>
+          <p>Caso ainda não tenha uma conta, preencha o formulário abaixo:</p>
+          <form action="/login/register" method="POST">
+            <div class="mb-3">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <label class="form-label">Email</label>
+              <input type="email" autocomplete="off" class="form-control" name="email" aria-describedby="emailHelp">
+              <div class="form-text">Exemplo: joao@email.com</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </form>
+        </div>
+        <div class="col-lg my-5">
+          <h4>Faça seu login</h4>
+          <p>Se já possui uma conta, faça seu login</p>
+          <form action="/login/login" method="POST">
+            <div class="mb-3">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <label class="form-label">Email</label>
+              <input type="email" autocomplete="off" class="form-control" name="email" aria-describedby="emailHelp">
+              <div class="form-text">Exemplo: joao@email.com</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
