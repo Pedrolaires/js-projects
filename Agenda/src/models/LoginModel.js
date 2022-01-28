@@ -57,8 +57,8 @@ class Login{
     }
 
     async userExists(){
-        this.user = await loginModel.findOne({email: this.body.email})
-        if (user) this.errors.push('Este usuário já existe! Tente fazer o login ou \'Esqueci a senha\'.');
+        this.user = await loginModel.findOne({email: this.body.email});
+        if(this.user) this.errors.push('Este usuário já existe! Tente fazer o login');
     }
 
     async register(){

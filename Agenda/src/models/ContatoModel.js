@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const { SourceMapDevToolPlugin } = require('webpack');
-
 const ContatoSchema = new mongoose.Schema({
     nome: {type: String, required: true},
     sobrenome: {type: String, required: false, default: ''},
@@ -12,7 +10,6 @@ const ContatoSchema = new mongoose.Schema({
 });
 
 const ContatoModel = mongoose.model('Contato', ContatoSchema);
-
 
 class Contato{
     constructor(body){
@@ -50,11 +47,29 @@ class Contato{
         if(!this.body.telefone && !this.body.email) this.errors.push('É necessario enviar ao menos um meio de contato! Email e/ou Telefone');
     }
 
-   /*  async contactExists(){
-        this.user = await loginModel.findOne({email: this.body.email})
-        if (user) this.errors.push('Este usuário já existe! Tente fazer o login ou \'Esqueci a senha\'.');
-    } */
+    async edit(id){
+        if(typeof id !== 'string') return;
+        this.validates();
+        if(this.errors.length > 0) return;
+        this.contato = await ContatoModel.findByIdAndUpdate(id,this.body,{new:true});
+    }
+    
+    static async findById(id){
+        if(typeof id !== 'string') return;
+        const contato = await ContatoModel.findById(id);
+        return contato;
+    }
 
+    static async findContacts(){
+        const contatos = await ContatoModel.find()
+        .sort({nome: 1});
+        return contatos;
+    }
+
+    static async deleteContacts(id){
+        if(typeof id !== 'string') return;
+        const contato = await ContatoModel.findOneAndDelete({_id:id});
+        return contato;
+    }
 }
-
 module.exports = Contato;

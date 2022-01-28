@@ -5,30 +5,33 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2">
-
     </div>
     <div class="col-lg-8 my-3">
       <h1 class="text-center">Contato</h1>
       <p class="text-center lead">Crie ou edite seus contatos</p>
      <%- include('includes/messages') %> 
       <div class="responsive-table">
+        <% if(contato._id) {%>
+        <form action="/contato/edit/<%= contato._id %>" method="POST">
+        <% } else {%> 
         <form action="/contato/register" method="POST">
+        <% } %> 
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <div class="mb-3">
             <label class="form-label">Nome</label>
-            <input type="text" autocomplete="off" class="form-control" name="nome">
+            <input value="<%=contato.nome %>" type="text" autocomplete="off" class="form-control" name="nome">
           </div>
           <div class="mb-3">
             <label class="form-label">Sobrenome</label>
-            <input type="text" autocomplete="off" class="form-control" name="sobrenome">
+            <input value="<%=contato.sobrenome%>" type="text" autocomplete="off" class="form-control" name="sobrenome">
           </div>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" autocomplete="off" class="form-control" name="email">
+            <input value="<%=contato.email%>" type="email" autocomplete="off" class="form-control" name="email">
           </div>
           <div class="mb-3">
             <label class="form-label">Telefone</label>
-            <input type="text" autocomplete="off" class="form-control" name="telefone">
+            <input value="<%=contato.telefone%>" type="text" autocomplete="off" class="form-control" name="telefone">
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
