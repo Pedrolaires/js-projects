@@ -57,7 +57,7 @@ class UserController {
       if (!user) return res.status(400).json({ errors: ['Usuário não existente!'] });
 
       await user.destroy();
-      return res.status(200).json({ sucess: ['Usuário apagado'] });
+      return res.status(200).json({ status: 'sucesso' });
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),

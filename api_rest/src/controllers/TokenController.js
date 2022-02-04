@@ -10,7 +10,7 @@ class TokenController {
 
     if (!user) return res.status(401).json({ errors: ['Usuário não encontrado'] });
 
-    if (!(await user.passwordIdValid(password))) return res.status(401).json({ errors: ['Senha inválida'] });
+    if (!(await user.passwordIsValid(password))) return res.status(401).json({ errors: ['Senha inválida'] });
 
     const { id } = user;
 
